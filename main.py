@@ -31,25 +31,25 @@ def heun_method(f, t0, T, u0, h):
         u_vals.append(u)
     return t_vals, u_vals
 
+def solve():
+    expr = entry_f.get()
+    t0, T = float(entry_t0.get()), float(entry_T.get())
+    u0, h = float(entry_u0.get()), float(entry_h.get())
+    f = make_f(expr)
+    t_euler, u_euler = euler_method(f, t0, T, u0, h)
+    t_heun, u_heun = heun_method(f, t0, T, u0, h)
+    print("Математика посчитана!") # Пока просто выводим в консоль
+
 root = tk.Tk()
 root.title("Решение ОДУ")
 
-tk.Label(root, text="Правая часть f(t,u):").grid(row=0, column=0)
 entry_f = tk.Entry(root); entry_f.insert(0, "u - t**2 + 1"); entry_f.grid(row=0, column=1)
-
-tk.Label(root, text="t0:").grid(row=1, column=0)
 entry_t0 = tk.Entry(root); entry_t0.insert(0, "0"); entry_t0.grid(row=1, column=1)
-
-tk.Label(root, text="T:").grid(row=2, column=0)
 entry_T = tk.Entry(root); entry_T.insert(0, "2"); entry_T.grid(row=2, column=1)
-
-tk.Label(root, text="u0:").grid(row=3, column=0)
 entry_u0 = tk.Entry(root); entry_u0.insert(0, "0.5"); entry_u0.grid(row=3, column=1)
-
-tk.Label(root, text="h:").grid(row=4, column=0)
 entry_h = tk.Entry(root); entry_h.insert(0, "0.1"); entry_h.grid(row=4, column=1)
 
-tk.Button(root, text="Решить").grid(row=5, column=0, columnspan=2)
+tk.Button(root, text="Решить", command=solve).grid(row=5, column=0, columnspan=2)
 canvas = tk.Canvas(root, width=600, height=400, bg='white'); canvas.grid(row=7, column=0, columnspan=2)
 
 root.mainloop()
